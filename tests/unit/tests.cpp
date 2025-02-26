@@ -1,11 +1,12 @@
-#include <gtest/gtest.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <gtest/gtest.h>
 
 // Подключаем заголовок, где объявлены функции калькулятора (можно создать parser.h)
 extern "C" {
-typedef enum { INTEGER, FLOAT } Mode;
+typedef enum { INTEGER,
+    FLOAT } Mode;
 void skip_whitespace(void);
 long long parse_number(void);
 double parse_factor(void);
@@ -13,7 +14,7 @@ double parse_term(void);
 double parse_expression(void);
 double custom_floor(double value);
 
-extern char *expr;
+extern char* expr;
 extern int pos;
 extern Mode mode;
 }
@@ -21,7 +22,7 @@ extern Mode mode;
 // Тест пропуска пробелов
 TEST(CalculatorTest, SkipWhitespace)
 {
-    expr = (char *)"  42";
+    expr = (char*)"  42";
     pos = 0;
     skip_whitespace();
     ASSERT_EQ(pos, 2);
@@ -30,7 +31,7 @@ TEST(CalculatorTest, SkipWhitespace)
 // Тест разбора числа
 TEST(CalculatorTest, ParseNumber)
 {
-    expr = (char *)"12345";
+    expr = (char*)"12345";
     pos = 0;
     ASSERT_EQ(parse_number(), 12345);
 }
@@ -38,7 +39,7 @@ TEST(CalculatorTest, ParseNumber)
 // Тест разбора числа с превышением границ
 TEST(CalculatorTest, ParseNumber_OutOfBounds)
 {
-    expr = (char *)"2000000001"; // больше MAX_INT
+    expr = (char*)"2000000001"; // больше MAX_INT
     pos = 0;
     ASSERT_EXIT(
         {
@@ -51,7 +52,7 @@ TEST(CalculatorTest, ParseNumber_OutOfBounds)
 // Тест разбора фактора — число
 TEST(CalculatorTest, ParseFactor_Number)
 {
-    expr = (char *)"78";
+    expr = (char*)"78";
     pos = 0;
     ASSERT_EQ(parse_factor(), 78);
 }
@@ -59,7 +60,7 @@ TEST(CalculatorTest, ParseFactor_Number)
 // Тест разбора фактора — скобки
 TEST(CalculatorTest, ParseFactor_Parentheses)
 {
-    expr = (char *)"(3+2)";
+    expr = (char*)"(3+2)";
     pos = 0;
     ASSERT_EQ(parse_factor(), 5);
 }
@@ -67,7 +68,7 @@ TEST(CalculatorTest, ParseFactor_Parentheses)
 // Тест ошибки: отсутствует закрывающая скобка
 TEST(CalculatorTest, ParseFactor_MissingParentheses)
 {
-    expr = (char *)"(3+2";
+    expr = (char*)"(3+2";
     pos = 0;
     ASSERT_EXIT(
         {
@@ -80,7 +81,7 @@ TEST(CalculatorTest, ParseFactor_MissingParentheses)
 // Тест деления на 0 в целочисленном режиме
 TEST(CalculatorTest, ParseTerm_DivideByZero)
 {
-    expr = (char *)"10/0";
+    expr = (char*)"10/0";
     pos = 0;
     ASSERT_EXIT(
         {
@@ -93,7 +94,7 @@ TEST(CalculatorTest, ParseTerm_DivideByZero)
 // Тест сложения
 TEST(CalculatorTest, ParseExpression_Addition)
 {
-    expr = (char *)"2+3";
+    expr = (char*)"2+3";
     pos = 0;
     ASSERT_EQ(parse_expression(), 5);
 }

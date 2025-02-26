@@ -8,9 +8,10 @@
 #define MAX_INT 2000000000
 #define MIN_FLOAT 0.0001
 
-typedef enum { INTEGER, FLOAT } Mode;
+typedef enum { INTEGER,
+    FLOAT } Mode;
 
-char *expr;
+char* expr;
 int pos = 0;
 Mode mode = INTEGER;
 
@@ -115,7 +116,7 @@ double parse_expression()
     return result;
 }
 #ifndef UNIT_TEST
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     char buffer[BUFFER_SIZE];
     if (!fgets(buffer, BUFFER_SIZE, stdin)) {
