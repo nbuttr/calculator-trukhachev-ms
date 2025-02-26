@@ -1,2 +1,5 @@
 *.exe
 *.txt
+googletest/
+build/
+__pycache__/
