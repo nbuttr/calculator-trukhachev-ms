@@ -103,5 +103,5 @@ venv:
 
 # --- Запуск интеграционных тестов ---
 run-integration-tests: venv $(APP_EXE)
-	$(PYTHON) $(INT_TESTS)
+	@APP_PATH=$(abspath $(APP_EXE)) $(PYTHON) -m pytest -v $(INTEGRATION_TEST_DIR)
 
