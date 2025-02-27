@@ -47,7 +47,7 @@ def test_max_number():
     res = subprocess.run(["./build/app.exe"], input = "2000000001+1", text=True, capture_output=True)
     assert res.returncode != 0
 
-def test_min_number():
-    res = subprocess.run(["./build/app.exe"], input = "-2000000001+1", text=True, capture_output=True)
+def test_un_minus():
+    res = subprocess.run(["./build/app.exe"], input = "-2+1", text=True, capture_output=True)
     assert res.returncode != 0
 
